@@ -26,7 +26,7 @@ export default function BecomeHost() {
             <div>
               <div className="subtitle-kicker text-[#d9a373]">Earn With Us</div>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-white mt-3 leading-tight">
-                Become a Host with <span className="brand-text">QuzeeDrive</span>
+                Become a Host with <span className="brand-text">Dating cars</span>
               </h2>
               <p className="text-white/75 mt-5 leading-relaxed max-w-xl">
                 Turn your parked car into a passive income machine. Join our self-drive platform and start earning every time someone books your vehicle — flexible, secure, and hassle-free.
