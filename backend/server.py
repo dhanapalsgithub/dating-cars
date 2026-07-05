@@ -234,6 +234,7 @@ async def shutdown_db_client():
 
 
 app.include_router(api_router)
+from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
