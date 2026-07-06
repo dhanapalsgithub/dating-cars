@@ -11,7 +11,7 @@ export default function Categories() {
             Your Trusted Self Drive Car Rental in Chennai
           </h2>
           <p className="text-neutral-600 mt-6 leading-relaxed max-w-2xl mx-auto">
-            At QuzeeDrive, we make travel flexible and stress-free with reliable self-drive cars in Chennai. Whether it’s a short city ride or a weekend getaway across Tamil Nadu, our well-maintained fleet is ready for your journey. Enjoy the freedom to drive without a driver, with simple pick-up and drop-off options citywide — all designed for your comfort, privacy, and convenience.
+            At dating-cars, we make travel flexible and stress-free with reliable self-drive cars in Chennai. Whether it’s a short city ride or a weekend getaway across Tamil Nadu, our well-maintained fleet is ready for your journey. Enjoy the freedom to drive without a driver, with simple pick-up and drop-off options citywide — all designed for your comfort, privacy, and convenience.
           </p>
         </div>
 

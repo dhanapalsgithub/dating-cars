@@ -1,16 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import useCars from "../hooks/useCars";
-import CarCard, { CarCardSkeleton } from "./CarCard";
+// 1. useCars ஹூக்குக்கு பதிலாக நேரடியாக data-வை இம்போர்ட் செய்யவும்
+import { carsData } from "../data/cars"; 
+import CarCard from "./CarCard";
 
 export default function Fleet({ limit }) {
-  const { cars, loading } = useCars();
-  const list = limit ? cars.slice(0, limit) : cars;
-  const skeletonKeys = Array.from({ length: limit || 4 }, (_, i) => `sk-${i}`);
-
-  console.log("Cars list:", list); // இது கன்சோலில் என்ன காட்டுகிறது?
-  console.log("Loading state:", loading);
-  console.log("Fleet Component Rendering...");
+  // 2. நேரடியாக carsData-வை பயன்படுத்தவும்
+  const list = limit ? carsData.slice(0, limit) : carsData;
 
   return (
     <section className="section bg-white" id="fleet">
@@ -26,9 +22,10 @@ export default function Fleet({ limit }) {
         </div>
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {loading
-            ? skeletonKeys.map((key) => <CarCardSkeleton key={key} />)
-            : list.map((car) => <CarCard key={car.id} car={car} variant="compact" />)}
+          {/* 3. loading ஸ்டேட் தேவையில்லை, எனவே நேரடியாக list-ஐ மேப் செய்யவும் */}
+          {list.map((car) => (
+            <CarCard key={car.id} car={car} variant="compact" />
+          ))}
         </div>
 
         {limit && (

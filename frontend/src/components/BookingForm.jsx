@@ -7,6 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Calendar } from "./ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { useToast } from "../hooks/use-toast";
+import { carsData } from "../data/cars";
 
 const EMPTY_FORM = { name: "", phone: "", start: null, end: null, car: "" };
 
@@ -15,7 +16,7 @@ export default function BookingForm({ cars }) {
   const [form, setForm] = useState(EMPTY_FORM);
 
   // WhatsApp configuration - Replace with your actual number
-  const WHATSAPP_NUMBER = "919999999999"; 
+  const WHATSAPP_NUMBER = "919999999999";
 
   const isValid = form.name && form.phone && form.start && form.end && form.car;
 
@@ -23,23 +24,23 @@ export default function BookingForm({ cars }) {
     e.preventDefault();
 
     if (!isValid) {
-      toast({ 
-        title: "Missing details", 
-        description: "Please fill all fields to proceed with WhatsApp booking." 
+      toast({
+        title: "Missing details",
+        description: "Please fill all fields to proceed with WhatsApp booking."
       });
       return;
     }
 
     // Format the message
     const message = `Hello! I would like to book a car:%0A%0A` +
-                    `*Name:* ${form.name}%0A` +
-                    `*Phone:* ${form.phone}%0A` +
-                    `*Trip Starts:* ${format(form.start, "PP")}%0A` +
-                    `*Trip Ends:* ${format(form.end, "PP")}%0A` +
-                    `*Selected Car:* ${form.car}`;
+      `*Name:* ${form.name}%0A` +
+      `*Phone:* ${form.phone}%0A` +
+      `*Trip Starts:* ${format(form.start, "PP")}%0A` +
+      `*Trip Ends:* ${format(form.end, "PP")}%0A` +
+      `*Selected Car:* ${form.car}`;
 
     const whatsappUrl = `https://wa.me/${7639609585}?text=${message}`;
-    
+
     // Redirect to WhatsApp
     window.open(whatsappUrl, '_blank');
   };
@@ -72,20 +73,28 @@ export default function BookingForm({ cars }) {
         <DatePick date={form.end} onSelect={(d) => setForm({ ...form, end: d })} />
       </Field>
       <Field label="SELECT CAR">
-        <Select value={form.car} onValueChange={(v) => setForm({ ...form, car: v })}>
-          <SelectTrigger className="border-0 shadow-none focus:ring-0 px-0 text-[14px] font-medium h-auto py-0">
+        <Select
+          value={form.car?.name || ""}
+          onValueChange={(selectedName) => {
+            // 2. Use the imported carsData to find the selected car
+            const foundCar = carsData.find((c) => c.name === selectedName);
+            setForm({ ...form, car: foundCar });
+          }}
+        >
+          <SelectTrigger>
             <SelectValue placeholder="Select car" />
           </SelectTrigger>
           <SelectContent>
-            {Array.isArray(cars) && cars.map((c) => (
-              <SelectItem key={c.id || c.name} value={c.name}>
+            {/* 3. Map through the imported carsData directly */}
+            {carsData.map((c) => (
+              <SelectItem key={c.id} value={c.name}>
                 {c.name}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
       </Field>
-      
+
       <Button
         type="submit"
         className="w-14 h-14 rounded-full bg-[#e67e22] hover:bg-[#b35e16] text-white shrink-0 justify-self-end md:justify-self-auto shadow-md md:ml-2 transition-colors"

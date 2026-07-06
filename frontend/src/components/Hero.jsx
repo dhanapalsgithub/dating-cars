@@ -1,9 +1,7 @@
 import BookingForm from "./BookingForm";
-import useCars from "../hooks/useCars";
+// useCars ஹூக்கை நீக்கிவிட்டோம், ஏனெனில் நமக்கு இனி அது தேவையில்லை
 
 export default function Hero() {
-  const { cars } = useCars();
-
   return (
     <section className="relative min-h-[100vh] flex items-center justify-center pt-24 pb-16">
       <div className="absolute inset-0">
@@ -28,7 +26,8 @@ export default function Hero() {
           </p>
         </div>
 
-        <BookingForm cars={cars} />
+        {/* இனி props அனுப்ப வேண்டிய அவசியமில்லை, ஏனெனில் BookingForm உள்ளேயே தரவுகளை எடுத்துக்கொள்ளும் */}
+        <BookingForm />
       </div>
     </section>
   );
